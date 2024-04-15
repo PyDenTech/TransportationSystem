@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="assets/js/user.js"></script>
+    <title>PyExpress</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="dashboard-escolar.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Buscar no PyExpress" title="Digite sua busca">
+        <button type="submit" title="Buscar"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">4</span>
+          </a><!-- End Notification Icon -->
+        </li><!-- End Notification Nav -->
+
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="badge bg-success badge-number">3</span>
+          </a><!-- End Messages Icon -->
+        </li><!-- End Messages Nav -->
+
+        <li class="nav-item dropdown pe-3">
+          <a id="profile-link" class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
+            data-bs-toggle="dropdown">
+            <img id="profile-image" src="assets/img/favicon.png" alt="Profile" class="rounded-circle">
+            <span id="usuarioNome" class="d-none d-md-block dropdown-toggle ps-2"></span>
+          </a><!-- End Profile Image Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6 id="usuarioFuncao"></h6>
+              <span id="usuarioLotacao"></h6>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Meu Perfil</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Configurações de Conta</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Ajuda</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#" id="logout-link">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair</span>
+              </a>
+            </li>
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-heading">Transporte Escolar</li>
+        <li class="nav-item">
+          <a class="nav-link" href="dashboard-escolar.html">
+            <i class="bi bi-speedometer2"></i>
+            <span>Painel de Controle</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#escolas-nav" data-bs-toggle="collapse" href="#">
+            <img src="assets/img/icones/escolas.svg" alt="Escolas"
+              style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+            <span>Escolas</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="escolas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="cadastrar-escolas-form.html">
+                <i class="bi bi-house-door"></i><span>Cadastrar</span>
+              </a>
+            </li>
+            <li>
+              <a href="gerenciar-escolas-view.html">
+                <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+              </a>
+            </li>
+            <li>
+              <a href="vizualizar-escolas-map.html">
+                <i class="bi bi-eye"></i><span>Vizualizar</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#aluno-nav" data-bs-toggle="collapse" href="#">
+            <img src="assets/img/icones/aluno.svg" alt="Censo Escolar"
+              style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+            <span>Alunos</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="aluno-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="cadastrar-aluno-form.html">
+                <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+              </a>
+            </li>
+            <li>
+              <a href="gerenciar-alunos-view.html">
+                <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+              </a>
+            </li>
+            <li>
+              <a href="importar-aluno-form.html">
+                <i class="bi bi-file-earmark-arrow-up"></i><span>Importar Dados</span>
+              </a>
+            </li>
+            <li>
+              <a href="visualizar-alunos-map.html">
+                <i class="bi bi-eye"></i><span>Vizualizar</span>
+              </a>
+            </li>
+          </ul>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#routs-nav" data-bs-toggle="collapse" href="#">
+            <img src="assets/img/icones/rotas.svg" alt="Escolas"
+              style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+            </i><span>Rotas</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="routs-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="cadastrar-rotas-form.html">
+                <i class="bi bi-plus-square"></i><span>Criar Rota</span>
+              </a>
+            </li>
+            <li>
+              <a href="gerenciar-rotas-view.html">
+                <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+              </a>
+            </li>
+            <li>
+              <a href="desenhar-rotas-map.html">
+                <i class="bi bi-pencil"></i><span>Editar Rota</span>
+              </a>
+            </li>
+            <li>
+              <a href="atualizar-rotas-geral.html">
+                <i class="bi bi-eye"></i><span>Atualizações</span>
+              </a>
+            </li>
+            <li>
+              <a href="vizualizar-malha.html">
+                <i class="bi bi-map"></i><span>Malha Viária</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#driverbus-nav" data-bs-toggle="collapse" href="#">
+            <img src="assets/img/icones/motoristas.svg" alt="Escolas"
+              style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+            <span>Motoristas</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="driverbus-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="cadastrar-motorista-form.html">
+                <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+              </a>
+            </li>
+            <li>
+              <a href="gerenciar-motoristas-view.html">
+                <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+            <img src="assets/img/icones/monitor-icone-branco.png" alt="Escolas"
+              style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+            </i><span>Monitores</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="cadastrar-monitores-form.html">
+                <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+              </a>
+            </li>
+            <li>
+              <a href="gerenciar-monitores-view.html">
+                <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#fornecedores-nav" data-bs-toggle="collapse" href="#">
+            <img src="assets/img/icones/fornecedores.svg" alt="Escolas"
+              style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+            </i><span>Fornecedor</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="fornecedores-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="cadastrar-fornecedores-form.html">
+                <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+              </a>
+            </li>
+            <li>
+              <a href="gerenciar-fornecedores-view.html">
+                <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+              </a>
+            </li>
+            <li>
+              <a href="vizualizar-fornecedores-map.html">
+                <i class="bi bi-eye"></i><span>Vizualizar</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#bus-nav" data-bs-toggle="collapse" href="#">
+            <img src="assets/img/icones/frotas.svg" alt="Escolas"
+              style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+            </i><span>Frota</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="bus-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="cadastrar-onibus-form.html">
+                <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+              </a>
+            </li>
+            <li>
+              <a href="gerenciar-onibus-view.html">
+                <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+              </a>
+            </li>
+            <li>
+              <a href="vizualizar-onibus-map.html">
+                <i class="bi bi-eye"></i><span>Vizualizar</span>
+              </a>
+            </li>
+            <li>
+              <a href="solicitar-onibus-services.html">
+                <i class="bi bi-file-earmark-text"></i><span>Ordem de Serviço</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+  
+        <li class="nav-heading">Administrativo</li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="dashboard-adm.html">
+            <i class="bi bi-speedometer"></i>
+            <span>Painel de Controle</span>
+          </a>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#car-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-car-front"></i><span>Frota</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="car-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="cadastrar-carro-form.html">
+                <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+              </a>
+            </li>
+            <li>
+              <a href="gerenciar-carros-view.html">
+                <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+              </a>
+            </li>
+            <li>
+              <a href="localizar-carros-map.html">
+                <i class="bi bi-geo-alt-fill"></i><span>Localizar</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#drivercar-nav" data-bs-toggle="collapse" href="#">
+            <img src="assets/img/icones/motoristas.svg" alt="Escolas"
+              style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+            <span>Motoristas</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="drivercar-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="cadastrar-motorista-carro-form.html">
+                <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+              </a>
+            </li>
+            <li>
+              <a href="gerenciar-motorista-carro-form.html">
+                <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#tarefas-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-list-check"></i><span>Tarefas</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="tarefas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="components-alerts.html">
+                <i class="bi bi-file-earmark-text"></i><span>Nova Tarefa</span>
+              </a>
+            </li>
+            <li>
+              <a href="components-alerts.html">
+                <i class="bi bi-person-plus"></i><span>Gerenciar Tarefas</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-heading">Controle Financeiro</li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#fuel-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-droplet-half"></i><span>Abastecimento</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="fuel-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="cadastrar-abastecimento-view.html">
+                <i class="bi bi-file-earmark-text"></i><span>Cadastrar Requisição</span>
+              </a>
+            </li>
+            <li>
+              <a href="gerenciar-abastecimento-view.html">
+                <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+  
+      </ul>
+  
+    </aside><!-- End Sidebar-->
+
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Cadastrar Fornecedor <i class="bi bi-truck"></i></h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="dashboard.html"><i class="bi bi-house"></i></a></li>
+                    <li class="breadcrumb-item">Fornecedores</li>
+                    <li class="breadcrumb-item active">Cadastrar</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Informações do Fornecedor</h5>
+                            <!-- General Form Elements -->
+                            <form id="fornecedorForm">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="control-label">
+                                            <b>Localização do Fornecedor (clique no mapa)</b>
+                                        </label>
+                                        <div id="map" style="width: 98%; height: 450px; margin: 10px;"></div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="latitudeFornecedor" class="form-label">Latitude</label>
+                                        <input type="text" class="form-control" id="latitudeFornecedor" name="latitudeFornecedor"
+                                            placeholder="Latitude">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="longitudeFornecedor" class="form-label">Longitude</label>
+                                        <input type="text" class="form-control" id="longitudeFornecedor" name="longitudeFornecedor"
+                                            placeholder="Longitude">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="nomeFornecedor" class="form-label">Nome do Fornecedor</label>
+                                        <input type="text" class="form-control" id="nomeFornecedor"
+                                            name="nomeFornecedor" placeholder="Nome do Fornecedor" required>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="telefoneFornecedor" class="form-label">Telefone</label>
+                                        <input type="text" class="form-control" id="telefoneFornecedor"
+                                            name="telefoneFornecedor" placeholder="Telefone do Fornecedor">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="emailFornecedor" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="emailFornecedor"
+                                            name="emailFornecedor" placeholder="Email do Fornecedor">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="enderecoFornecedor" class="form-label">Endereço</label>
+                                        <input type="text" class="form-control" id="enderecoFornecedor"
+                                            name="enderecoFornecedor" placeholder="Endereço do Fornecedor">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="descricaoFornecedor" class="form-label">Descrição</label>
+                                        <textarea class="form-control" id="descricaoFornecedor"
+                                            name="descricaoFornecedor" placeholder="Descrição do Fornecedor"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary"
+                                        onclick="enviarCadastroFornecedor()">Cadastrar Fornecedor</button>
+                                </div>
+                            </form><!-- End General Form Elements -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======= Rodapé ======= -->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="row gy-4">
+
+
+                <div class="container mt-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="copyright">
+                                &copy; Direitos Autorais <strong><span>PyExpress</span></strong>. Todos os Direitos
+                                Reservados
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="credits">
+                                Desenvolvido por <a href="https://danilomorais.netlify.app/">Danilo de Morais</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </footer><!-- Fim do Rodapé -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.min.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+    <!-- Template Main JS File -->
+
+    <script src="assets/js/fornecedorCadastrarMap.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

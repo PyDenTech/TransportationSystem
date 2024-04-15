@@ -1,0 +1,45 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Administração de Usuários</title>
+    <!-- Adicione aqui links para CSS e JS se necessário -->
+</head>
+
+<body>
+
+    <h1>Administração de Usuários</h1>
+    <div>
+        <input type="text" id="searchUser" placeholder="Pesquisar usuário..." oninput="searchUsers(this.value)">
+        <div id="userList">
+            <!-- Lista de usuários -->
+        </div>
+    </div>
+
+    <div id="userList"></div>
+    <script src="/assets/js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const nome = localStorage.getItem('userNome');
+            const role = localStorage.getItem('userRole');
+            const cidade = localStorage.getItem('userCidade');
+
+            if (nome) {
+                document.getElementById('usuarioNome').textContent = nome;
+                document.getElementById('usuarioNome').classList.remove('d-none');
+            }
+            if (role) {
+                document.getElementById('usuarioRole').textContent = role;
+            }
+            if (cidade) {
+                document.getElementById('usuarioCidade').textContent = cidade;
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

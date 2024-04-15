@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <script src="assets/js/user.js"></script>
+  <title>PyExpress</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="dashboard-escolar.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Buscar no PyExpress" title="Digite sua busca">
+        <button type="submit" title="Buscar"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">4</span>
+          </a><!-- End Notification Icon -->
+        </li><!-- End Notification Nav -->
+
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="badge bg-success badge-number">3</span>
+          </a><!-- End Messages Icon -->
+        </li><!-- End Messages Nav -->
+
+        <li class="nav-item dropdown pe-3">
+          <a id="profile-link" class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
+            data-bs-toggle="dropdown">
+            <img id="profile-image" src="assets/img/favicon.png" alt="Profile" class="rounded-circle">
+            <span id="usuarioNome" class="d-none d-md-block dropdown-toggle ps-2"></span>
+          </a><!-- End Profile Image Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6 id="usuarioFuncao"></h6>
+              <span id="usuarioLotacao"></h6>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Meu Perfil</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Configurações de Conta</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Ajuda</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#" id="logout-link">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair</span>
+              </a>
+            </li>
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-heading">Transporte Escolar</li>
+      <li class="nav-item">
+        <a class="nav-link" href="dashboard-escolar.html">
+          <i class="bi bi-speedometer2"></i>
+          <span>Painel de Controle</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#zona-nav" data-bs-toggle="collapse" href="#">
+          <img src="assets/img/icones/zona.png" alt="Zoneamento"
+            style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+          <span>Zoneamento</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="zona-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="cadastrar-zona-form.html">
+              <i class="bi bi-house-door"></i><span>Cadastrar</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerenciar-zona-view.html">
+              <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#escolas-nav" data-bs-toggle="collapse" href="#">
+          <img src="assets/img/icones/escolas.svg" alt="Escolas"
+            style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+          <span>Escolas</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="escolas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="cadastrar-escolas-form.html">
+              <i class="bi bi-house-door"></i><span>Cadastrar</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerenciar-escolas-view.html">
+              <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+            </a>
+          </li>
+          <li>
+            <a href="vizualizar-escolas-map.html">
+              <i class="bi bi-eye"></i><span>Vizualizar</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#aluno-nav" data-bs-toggle="collapse" href="#">
+          <img src="assets/img/icones/aluno.svg" alt="Censo Escolar"
+            style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+          <span>Alunos</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="aluno-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="cadastrar-aluno-form.html">
+              <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerenciar-alunos-view.html">
+              <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+            </a>
+          </li>
+          <li>
+            <a href="importar-aluno-form.html">
+              <i class="bi bi-file-earmark-arrow-up"></i><span>Importar Dados</span>
+            </a>
+          </li>
+          <li>
+            <a href="visualizar-alunos-map.html">
+              <i class="bi bi-eye"></i><span>Vizualizar</span>
+            </a>
+          </li>
+        </ul>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#routs-nav" data-bs-toggle="collapse" href="#">
+          <img src="assets/img/icones/rotas.svg" alt="Escolas"
+            style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+          </i><span>Rotas</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="routs-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="cadastrar-rotas-form.html">
+              <i class="bi bi-plus-square"></i><span>Criar Rota</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerenciar-rotas-view.html">
+              <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+            </a>
+          </li>
+          <li>
+            <a href="desenhar-rotas-map.html">
+              <i class="bi bi-pencil"></i><span>Editar Rota</span>
+            </a>
+          </li>
+          <li>
+            <a href="atualizar-rotas-geral.html">
+              <i class="bi bi-eye"></i><span>Atualizações</span>
+            </a>
+          </li>
+          <li>
+            <a href="vizualizar-malha.html">
+              <i class="bi bi-map"></i><span>Malha Viária</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#driverbus-nav" data-bs-toggle="collapse" href="#">
+          <img src="assets/img/icones/motoristas.svg" alt="Escolas"
+            style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+          <span>Motoristas</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="driverbus-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="cadastrar-motorista-form.html">
+              <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerenciar-motoristas-view.html">
+              <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerar-relatorio-view.html">
+              <i class="bi bi-clipboard2-check"></i><span>Relatórios</span>
+            </a>
+          </li>
+          <li>
+            <a href="check-list.html">
+              <i class="bi bi-list-check"></i><span>Check List</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+          <img src="assets/img/icones/monitor-icone-branco.png" alt="Escolas"
+            style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+          </i><span>Monitores</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="cadastrar-monitores-form.html">
+              <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerenciar-monitores-view.html">
+              <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#fornecedores-nav" data-bs-toggle="collapse" href="#">
+          <img src="assets/img/icones/fornecedores.svg" alt="Escolas"
+            style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+          </i><span>Fornecedor</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="fornecedores-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="cadastrar-fornecedores-form.html">
+              <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerenciar-fornecedores-view.html">
+              <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+            </a>
+          </li>
+          <li>
+            <a href="vizualizar-fornecedores-map.html">
+              <i class="bi bi-eye"></i><span>Vizualizar</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#bus-nav" data-bs-toggle="collapse" href="#">
+          <img src="assets/img/icones/frotas.svg" alt="Escolas"
+            style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+          </i><span>Frota</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="bus-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="cadastrar-onibus-form.html">
+              <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerenciar-onibus-view.html">
+              <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+            </a>
+          </li>
+          <li>
+            <a href="vizualizar-onibus-map.html">
+              <i class="bi bi-eye"></i><span>Vizualizar</span>
+            </a>
+          </li>
+          <li>
+            <a href="solicitar-onibus-services.html">
+              <i class="bi bi-file-earmark-text"></i><span>Ordem de Serviço</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-heading">Administrativo</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="dashboard-adm.html">
+          <i class="bi bi-speedometer"></i>
+          <span>Painel de Controle</span>
+        </a>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#car-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-car-front"></i><span>Frota</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="car-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="cadastrar-carro-form.html">
+              <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerenciar-carros-view.html">
+              <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+            </a>
+          </li>
+          <li>
+            <a href="localizar-carros-map.html">
+              <i class="bi bi-geo-alt-fill"></i><span>Localizar</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#drivercar-nav" data-bs-toggle="collapse" href="#">
+          <img src="assets/img/icones/motoristas.svg" alt="Escolas"
+            style="width: 20px; height: 20px; margin-right: 5px; color: white;">
+          <span>Motoristas</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="drivercar-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="cadastrar-motorista-carro-form.html">
+              <i class="bi bi-person-plus"></i><span>Cadastrar</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerenciar-motorista-carro-form.html">
+              <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tarefas-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-list-check"></i><span>Tarefas</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tarefas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="components-alerts.html">
+              <i class="bi bi-file-earmark-text"></i><span>Nova Tarefa</span>
+            </a>
+          </li>
+          <li>
+            <a href="components-alerts.html">
+              <i class="bi bi-person-plus"></i><span>Gerenciar Tarefas</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-heading">Controle Financeiro</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#fuel-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-droplet-half"></i><span>Abastecimento</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="fuel-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="cadastrar-abastecimento-view.html">
+              <i class="bi bi-file-earmark-text"></i><span>Cadastrar Requisição</span>
+            </a>
+          </li>
+          <li>
+            <a href="gerenciar-abastecimento-view.html">
+              <i class="bi bi-pencil-square"></i><span>Gerenciar</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Cadastrar Aluno <i class="bi bi-building"></i></h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="dashboard-escolar.html"><i class="bi bi-house"></i></a></li>
+          <li class="breadcrumb-item"><a href="cadastrar-aluno-form.html">Alunos</a></li>
+          <li class="breadcrumb-item active">Cadastrar</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Localização</h5>
+              <!-- General Form Elements -->
+              <form id="alunoForm">
+                <div class="col-12 obr">
+                  <label class="control-label">
+                    <b>Localização da Residência do Aluno (clique no mapa)</b>
+                  </label>
+                  <div class="row">
+                    <div id="map" style="width: 98%; height: 450px; margin: 10px;"></div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <div class="row justify-content-center">
+                      <div class="col-6 ">
+                        <div class="row">
+                          <label class="col-4 control-label latlon-label"><b>Latitude</b>
+                          </label>
+                          <div class="col-5">
+                            <input class="form-control" type="text" id="reglat" name="reglat" placeholder="Latitude:" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="row">
+                          <label class="col-4 control-label latlon-label"><b>Longitude</b>
+                          </label>
+                          <div class="col-5">
+                            <input class="form-control" type="text" id="reglon" name="reglon"
+                              placeholder="Longitude:" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group obr">
+                    <div class="row">
+                      <div class="col-6">
+                        <label class="control-label">
+                          <b>O aluno está localizado em:</b>
+                          <star>*</star>
+                        </label>
+                      </div>
+                      <div class="form-check form-check-radio">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="radio" id="areaUrbana" name="areaUrbana" value="1"> Área
+                          Urbana
+                        </label>
+                      </div>
+                      <div class="col-6"></div>
+                      <div class="form-check form-check-radio">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="radio" id="areaRural" name="areaUrbana" value="2"> Área
+                          Rural
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="mb-3 control-label">
+                      <b>O local possui alguma dificuldade de acesso? Se sim, marque as
+                        dificuldades:</b>
+                    </label>
+                    <div class="row">
+                      <div class="col-10">
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input id="temPorteira" name="temPorteira" value="1" type="checkbox"
+                              class="form-check-input">
+                            <span class="form-check-sign"></span>
+                            Porteira </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label from-check-inline">
+                            <input id="temMataBurro" name="temMataBurro" value="1" type="checkbox"
+                              class="form-check-input">
+                            <span class="form-check-sign"></span>
+                            Mata-Burro
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label from-check-inline">
+                            <input id="temColchete" name="temColchete" value="1" type="checkbox"
+                              class="form-check-input">
+                            <span class="form-check-sign"></span>
+                            Colchete
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label from-check-inline">
+                            <input id="temAtoleiro" name="temAtoleiro" value="1" type="checkbox"
+                              class="form-check-input">
+                            <span class="form-check-sign"></span>
+                            Atoleiro
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label from-check-inline">
+                            <input id="temPonte" name="temPonte" value="1" type="checkbox" class="form-check-input">
+                            <span class="form-check-sign"></span>
+                            Ponte Rústica
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Endereço</h5>
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <b><label for="inputAddress" class="form-label">Logradouro</label></b>
+                  <input type="text" class="form-control" name="inputAddress" id="inputAddress"
+                    placeholder="Rua, Avenida, Vicinal etc.">
+                </div>
+                <div class="col-md-4">
+                  <b><label for="inputNumber" class="form-label">Número</label></b>
+                  <input type="text" class="form-control" name="inputNumber" id="inputNumber" placeholder="Número">
+                </div>
+                <div class="col-md-4">
+                  <b> <label for="inputComplement" class="form-label">Complemento</label></b>
+                  <input type="text" class="form-control" name="inputComplement" id="inputComplement"
+                    placeholder="Ponto de Referência">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <b><label for="inputBairro" class="form-label">Bairro</label></b>
+                    <select class="form-select" id="inputBairro" name="inputBairro">
+                      <!-- As opções serão carregadas dinamicamente -->
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <b> <label for="inputZip" class="form-label">CEP</label></b>
+                  <input type="text" class="form-control" name="inputZip" id="inputZip" placeholder="CEP">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Dados Pessoais</h5>
+
+              <!-- Nome do Aluno, CPF, Data de Nascimento -->
+              <div class="row mb-3">
+                <!-- Nome do Aluno -->
+                <div class="col-md-4">
+                  <b> <label for="inputStudentName" class="form-label">Nome do Aluno</label></b>
+                  <input type="text" class="form-control" name="inputStudentName" id="inputStudentName"
+                    placeholder="Informe o nome do aluno">
+                </div>
+
+                <!-- CPF do Aluno -->
+                <div class="col-md-4">
+                  <b><label for="inputStudentCPF" class="form-label">CPF do Aluno</label></b>
+                  <input type="text" class="form-control" name="inputStudentCPF" id="inputStudentCPF"
+                    placeholder="Informe o CPF do aluno">
+                </div>
+
+                <!-- Data de Nascimento -->
+                <div class="col-md-4">
+                  <b><label for="inputBirthDate" class="form-label">Data de Nascimento</label></b>
+                  <input type="date" class="form-control" name="inputBirthDate" id="inputBirthDate">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <!-- Telefone do Responsável -->
+                <div class="col-md-6">
+                  <b><label for="inputGuardianPhone" class="form-label">Telefone do
+                      Responsável</label></b>
+                  <input type="tel" class="form-control" id="inputGuardianPhone" name="inputGuardianPhone"
+                    placeholder="Telefone do responsável">
+                </div>
+
+                <!-- Grau de Parentesco -->
+                <div class="col-md-6">
+                  <b><label for="inputRelationship" class="form-label">Grau de Parentesco</label></b>
+                  <select class="form-select" id="inputRelationship" name="inputRelationship">
+                    <option selected>Escolha...</option>
+                    <option value="1">Pai/Mãe</option>
+                    <option value="2">Avô/Avó</option>
+                    <option value="3">Tio/Tia</option>
+                    <option value="4">Outros</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <!-- Sexo do Aluno -->
+                <div class="col-md-6">
+                  <b><label class="form-label">Sexo do Aluno</label></b>
+                  <div class="d-flex align-items-center">
+                    <div class="form-check me-2">
+                      <input class="form-check-input" type="radio" name="studentGender" id="genderMale"
+                        value="masculino">
+                      <label class="form-check-label" for="genderMale">Masculino</label>
+                    </div>
+                    <div class="form-check me-2">
+                      <input class="form-check-input" type="radio" name="studentGender" id="genderFemale"
+                        value="feminino">
+                      <label class="form-check-label" for="genderFemale">Feminino</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="studentGender" id="genderNotSpecified"
+                        value="nao_informado">
+                      <label class="form-check-label" for="genderNotSpecified">Não
+                        Informado</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cor do Aluno -->
+                <div class="col-md-6">
+                  <b> <label for="inputColor" class="form-label">A Cor do Aluno é?</label></b>
+                  <select class="form-select" id="inputColor" name="inputColor">
+                    <option selected>Escolha...</option>
+                    <option value="amarelo">Amarelo</option>
+                    <option value="branco">Branco</option>
+                    <option value="indigena">Indígena</option>
+                    <option value="pardo">Pardo</option>
+                    <option value="preto">Preto</option>
+                    <option value="nao_declarada">Não declarada</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Deficiências do Aluno -->
+              <div class="row mb-3">
+                <div class="col-md-12">
+                  <b><label class="form-label">O aluno possui alguma deficiencia? Se sim marque o tipo
+                      abaixo</label></b>
+                  <div class="d-flex flex-wrap">
+                    <div class="form-check me-3">
+                      <input class="form-check-input" type="checkbox" id="deficiencyWalking" name="deficiencyWalking">
+                      <label class="form-check-label" for="deficiencyWalking">
+                        De Caminhar
+                      </label>
+                    </div>
+                    <div class="form-check me-3">
+                      <input class="form-check-input" type="checkbox" id="deficiencyHearing" name="deficiencyHearing">
+                      <label class="form-check-label" for="deficiencyHearing">
+                        De Ouvir
+                      </label>
+                    </div>
+                    <div class="form-check me-3">
+                      <input class="form-check-input" type="checkbox" id="deficiencySeeing" name="deficiencySeeing">
+                      <label class="form-check-label" for="deficiencySeeing">
+                        De Enxergar
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="deficiencyMental" name="deficiencyMental">
+                      <label class="form-check-label" for="deficiencyMental">
+                        Mental Ou Intelectual
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Dados Escolares</h5>
+              <!-- Escola do Aluno -->
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <b><label for="inputSchool" class="col-sm-6 col-form-label">Qual a escola do
+                      aluno?</label></b>
+                  <div class="col-sm-10">
+                    <select class="form-select" id="inputSchool" name="inputSchool">
+                      <!-- Opções de escolas aqui -->
+                    </select>
+                  </div>
+                </div>
+                <!-- Rota do Aluno -->
+                <div class="col-md-6">
+                  <b><label for="inputRota" class="col-sm-6 col-form-label">Qual a rota do aluno?</label></b>
+                  <div class="col-sm-10">
+                    <select class="form-select" id="inputRota" name="inputRota">
+                      <option value="">Escolha...</option> <!-- Opção padrão atualizada -->
+                      <!-- As opções de rotas serão carregadas aqui -->
+                    </select>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Turno que o Aluno Estuda, Nível de Ensino do Aluno -->
+              <div class="row mb-3">
+                <!-- Turno que o Aluno Estuda -->
+                <div class="col-md-6">
+                  <b> <label class="form-label">Qual o turno que o aluno estuda?</label></b>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="studyShift" id="shiftMorning" value="manha">
+                    <label class="form-check-label" for="shiftMorning">Manhã</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="studyShift" id="shiftAfternoon" value="tarde">
+                    <label class="form-check-label" for="shiftAfternoon">Tarde (Vespertino)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="studyShift" id="shiftFull" value="integral">
+                    <label class="form-check-label" for="shiftFull">Integral (Manhã + Tarde)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="studyShift" id="shiftNight" value="noite">
+                    <label class="form-check-label" for="shiftNight">Noite (Noturno)</label>
+                  </div>
+                </div>
+
+                <!-- Nível de Ensino do Aluno -->
+                <div class="col-md-6">
+                  <b><label for="inputEducationLevel" class="form-label">Em qual nível de ensino o
+                      aluno
+                      se encontra?</label></b>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="educationLevel" id="levelInfantil"
+                      value="infantil">
+                    <label class="form-check-label" for="levelInfantil">Infantil (Creche e
+                      Pré-escola)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="educationLevel" id="levelFundamental"
+                      value="fundamental">
+                    <label class="form-check-label" for="levelFundamental">Fundamental</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="educationLevel" id="levelMedio" value="medio">
+                    <label class="form-check-label" for="levelMedio">Médio</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="educationLevel" id="levelSuperior"
+                      value="superior">
+                    <label class="form-check-label" for="levelSuperior">Superior</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="educationLevel" id="levelOutro" value="outro">
+                    <label class="form-check-label" for="levelOutro">Outro</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="row mb-3">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Cadastrar Aluno</button>
+              </div>
+            </div>
+          </div>
+          </form><!-- End General Form Elements -->
+
+        </div>
+      </div>
+
+      </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Rodapé ======= -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="row gy-4">
+
+
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="copyright">
+                &copy; Direitos Autorais <strong><span>PyExpress</span></strong>. Todos os Direitos
+                Reservados
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="credits">
+                Desenvolvido por <a href="https://danilomorais.netlify.app/">Danilo de Morais</a>
+              </div>
+            </div>
+          </div>
+        </div>
+  </footer><!-- Fim do Rodapé -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+  <!-- Template Main JS File -->
+
+  <script src="assets/js/alunoCadastrarMap.js"></script>
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
