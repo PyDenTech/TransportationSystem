@@ -17,20 +17,16 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Configuração do banco de dados pyexpress
+// Configuração do banco de dados
 const dbPool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'pyexpress',
-    password: 'D4n1l0-210997',
-    port: 5432,
+    connectionString: 'postgres://zafiwlyc:Z3W2f2IuplKeDcHLD6_7_ChzYOiI17oV@isabelle.db.elephantsql.com/zafiwlyc',
 });
 
 dbPool.connect(err => {
     if (err) {
-        console.error('Erro ao conectar ao banco de dados pyexpress', err.stack);
+        console.error('Erro ao conectar ao banco de dados', err.stack);
     } else {
-        console.log('Conectado ao banco de dados pyexpress');
+        console.log('Conectado ao banco de dados');
     }
 });
 
