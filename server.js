@@ -181,9 +181,14 @@ app.post('/entrar', async (req, res) => {
             const user = usuarioData.rows[0];
             const senhaValida = await bcrypt.compare(senha, user.password);
             if (senhaValida && user.init) {
-                req.session.user = user;
+                req.session.user = {
+                    id: user.id,
+                    nome: user.nome,
+                    role: user.role,
+                    cidade: user.cidade
+                };
                 req.session.isAuthenticated = true;
-                res.json({ success: true, user: { nome: user.nome, role: user.role, cidade: user.cidade } });
+                res.json({ success: true, user: req.session.user });
             } else {
                 res.status(401).json({ success: false, message: 'Erro de login.' });
             }
@@ -193,7 +198,13 @@ app.post('/entrar', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao tentar entrar.' });
     }
 });
-
+app.get('/api/usuario/sessao', (req, res) => {
+    if (req.session.user && req.session.isAuthenticated) {
+        res.json({ isAuthenticated: true, user: req.session.user });
+    } else {
+        res.json({ isAuthenticated: false });
+    }
+});
 
 app.post('/update-user-role/:userId', async (req, res) => {
     const { userId } = req.params;

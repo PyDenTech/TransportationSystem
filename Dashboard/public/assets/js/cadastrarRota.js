@@ -1,158 +1,93 @@
-let map;
-let markers = [];
-let directionsService;
-let directionsRenderer;
-
-function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -6.530731, lng: -49.851650 },
-        zoom: 13,
+document.getElementById("btn-add-escola").addEventListener("click", function () {
+    var selectedOptions = document.querySelectorAll("#escolasNaoAtendidas option:checked");
+    selectedOptions.forEach(function (option) {
+        document.getElementById("escolasAtendidas").appendChild(option);
     });
+});
 
-    directionsService = new google.maps.DirectionsService();
-    directionsRenderer = new google.maps.DirectionsRenderer();
-    directionsRenderer.setMap(map);
-
-    map.addListener("click", (event) => {
-        addMarker(event.latLng);
+// Script para remover escolas
+document.getElementById("btn-remove-escola").addEventListener("click", function () {
+    var selectedOptions = document.querySelectorAll("#escolasAtendidas option:checked");
+    selectedOptions.forEach(function (option) {
+        document.getElementById("escolasNaoAtendidas").appendChild(option);
     });
-}
+});
 
-function addMarker(location) {
-    const marker = new google.maps.Marker({
-        position: location,
-        map: map,
-        draggable: true 
+// Script para adicionar alunos
+document.getElementById("btn-add-aluno").addEventListener("click", function () {
+    var selectedOptions = document.querySelectorAll("#alunosNaoAtendidos option:checked");
+    selectedOptions.forEach(function (option) {
+        document.getElementById("alunosAtendidos").appendChild(option);
     });
-    markers.push(marker);
-    displayPoint(location, markers.length);
-}
+});
 
-function displayPoint(location, index) {
-    const pointList = document.getElementById("pointList");
-    const li = document.createElement("li");
-    li.innerHTML = `
-    <div class="point-info">
-        <strong>Ponto ${index}</strong><br>
-        <strong>Coordenadas:</strong> Latitude: ${location.lat().toFixed(6)}, Longitude: ${location.lng().toFixed(6)}<br>
-        <strong>Endereço:</strong> <span id="address_${index}">Aguardando Endereço...</span>
-        <button onclick="removeMarker(${index})" class="btn btn-remove-marker">Remover</button>
-    </div>
-`;
-    pointList.appendChild(li);
+// Script para remover alunos
+document.getElementById("btn-remove-aluno").addEventListener("click", function () {
+    var selectedOptions = document.querySelectorAll("#alunosAtendidos option:checked");
+    selectedOptions.forEach(function (option) {
+        document.getElementById("alunosNaoAtendidos").appendChild(option);
+    });
+});
 
-    
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ location: location }, (results, status) => {
-        if (status === "OK") {
-            if (results[0]) {
-                const addressElement = document.getElementById(`address_${index}`);
-                addressElement.textContent = results[0].formatted_address;
-            } else {
-                window.alert("Nenhum resultado encontrado para estas coordenadas.");
-            }
-        } else {
-            window.alert("Falha ao obter o endereço: " + status);
+function mostrarOcultarBotoes() {
+    var tabEscolas = document.getElementById("tab-dados-escola");
+    var tabAlunos = document.getElementById("tab-dados-alunos");
+    var btnVoltar = document.getElementById("btn-back");
+    var btnProximo = document.getElementById("btn-next");
+    var btnConcluir = document.getElementById("salvarrota");
+    var navLinks = document.querySelectorAll(".nav-item");
+
+    // Botão "Voltar" só deve ser exibido se a aba ativa for "Escolas" ou "Alunos"
+    btnVoltar.style.display = (tabEscolas.classList.contains("show") || tabAlunos.classList.contains("show")) ? "inline-block" : "none";
+
+    // Botão "Concluir" só deve ser exibido se a aba ativa for "Alunos"
+    btnConcluir.style.display = (tabAlunos.classList.contains("show")) ? "inline-block" : "none";
+
+    // Botão "Próximo" só deve ser exibido se a aba ativa não for "Alunos"
+    btnProximo.style.display = (tabAlunos.classList.contains("show")) ? "none" : "inline-block";
+
+    // Botão "Cancelar" deve ser exibido em todas as abas
+    document.getElementById("cancelarAcao").style.display = "inline-block";
+
+    // Altera a classe "active" nos itens da lista de navegação com base na aba ativa
+    navLinks.forEach(function (link) {
+        link.classList.remove("active");
+        var tabId = link.querySelector("button").getAttribute("aria-controls");
+        var tab = document.getElementById(tabId);
+        if (tab.classList.contains("show")) {
+            link.classList.add("active");
         }
     });
 }
 
-function generateRoute() {
-    if (markers.length < 2) {
-        window.alert("Adicione pelo menos dois pontos para gerar a rota.");
-        return;
-    }
-
-    const waypoints = markers.map(marker => ({
-        location: marker.getPosition(),
-        stopover: true
-    }));
-
-    const request = {
-        origin: markers[0].getPosition(),
-        destination: markers[markers.length - 1].getPosition(),
-        waypoints: waypoints.slice(1, -1),
-        travelMode: google.maps.TravelMode.DRIVING
-    };
-
-    directionsService.route(request, (result, status) => {
-        if (status === "OK") {
-            directionsRenderer.setDirections(result);
-            const route = result.routes[0];
-            let tempoEstimado = 0;
-            let distanciaRota = 0;
-            route.legs.forEach(leg => {
-                tempoEstimado += leg.duration.value;
-                distanciaRota += leg.distance.value;
-            });
-            tempoEstimado = Math.round(tempoEstimado / 60); // Convertendo para minutos
-            distanciaRota = (distanciaRota / 1000).toFixed(2); // Convertendo para quilômetros com duas casas decimais
-            document.getElementById("tempoEstimado").value = tempoEstimado + " minutos";
-            document.getElementById("distanciaRota").value = distanciaRota + " km";
-        } else {
-            window.alert("Falha ao gerar a rota: " + status);
-        }
-    });
-}
-
-function removeMarker(index) {
-    markers[index - 1].setMap(null); // Remover o marcador do mapa
-    markers.splice(index - 1, 1); // Remover o marcador do array
-    updatePointList(); // Atualizar a lista de pontos
-}
-
-function moveMarker(index) {
-    markers[index - 1].setMap(null); // Remover o marcador do mapa
-    markers[index - 1] = new google.maps.Marker({ // Criar um novo marcador com draggable
-        position: markers[index - 1].getPosition(),
-        map: map,
-        draggable: true
-    });
-    google.maps.event.addListener(markers[index - 1], 'dragend', function (event) {
-        updatePointList(); // Atualizar a lista de pontos quando o marcador for movido
-    });
-    updatePointList(); // Atualizar a lista de pontos
-}
-
-function updatePointList() {
-    const pointList = document.getElementById("pointList");
-    pointList.innerHTML = ""; // Limpar a lista de pontos
-    markers.forEach((marker, index) => {
-        displayPoint(marker.getPosition(), index + 1); // Exibir novamente os pontos atualizados
-    });
-}
-
-function undoLastMarker() {
-    if (markers.length > 0) {
-        markers.pop().setMap(null); // Remover o último marcador adicionado
-        updatePointList(); // Atualizar a lista de pontos
-    } else {
-        window.alert("Não há pontos para remover.");
-    }
-}
-
-
-// Supondo que você tenha um formulário HTML com IDs correspondentes aos campos
-const form = document.getElementById('formCadastroRotas');
-
-form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(form);
-
-    try {
-        const response = await fetch('/cadastrar-rota', {
-            method: 'POST',
-            body: formData
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data.message); // Mensagem de sucesso
-        } else {
-            console.error('Erro ao cadastrar rota:', response.statusText);
-        }
-    } catch (error) {
-        console.error('Erro ao enviar dados do formulário:', error);
+// Adiciona um evento de clique para os botões de navegação
+document.getElementById("btn-back").addEventListener("click", function () {
+    // Navega para a aba anterior
+    var activeTab = document.querySelector(".tab-pane.active");
+    var previousTab = activeTab.previousElementSibling;
+    if (previousTab) {
+        activeTab.classList.remove("show", "active");
+        previousTab.classList.add("show", "active");
+        mostrarOcultarBotoes();
     }
 });
+
+document.getElementById("btn-next").addEventListener("click", function () {
+    // Navega para a próxima aba
+    var activeTab = document.querySelector(".tab-pane.active");
+    var nextTab = activeTab.nextElementSibling;
+    if (nextTab) {
+        activeTab.classList.remove("show", "active");
+        nextTab.classList.add("show", "active");
+        mostrarOcultarBotoes();
+    }
+});
+
+// Adiciona um evento de clique para o botão "Cancelar"
+document.getElementById("cancelarAcao").addEventListener("click", function () {
+    // Recarrega a página para cancelar a ação
+    location.reload();
+});
+
+// Inicia a função para mostrar ou ocultar botões quando a página é carregada
+window.addEventListener("load", mostrarOcultarBotoes);
